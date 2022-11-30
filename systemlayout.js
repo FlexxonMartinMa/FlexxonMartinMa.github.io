@@ -67,13 +67,15 @@ function runMyFunction(fcW,runTime){
 				}
 				if($enableRowPressToShowList){
 					bodyTR[i].onmousedown = function(){
+alert(123);
 						if($trPressTimer!=null) clearTimeout($trPressTimer);
 						var eachTR = this;
 						$trPressTimer = setTimeout(function(){
+alert(456);
 							var eHeader = fcW.document.getElementById('ctl00_phG_grid_headerT');
 							var headerH = eHeader.getElementsByTagName('thead')[0], rHtml = '';
 							if(headerH){
-alert(123);
+alert(789);
 								rHtml += '<style> div#covertable { text-align:left; } div#covertable td { padding: 10px; }</style>';
 								rHtml += '<div id="covertable">';
 								rHtml += '<table border="1" cellpadding="0" cellspacing="0" style="border-color:#000;">';
