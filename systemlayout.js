@@ -52,9 +52,7 @@ function runMyFunction(fcW,runTime){
 		if(overRowTable) overRowTable.style.opacity = '0.4';
 	}
 	function setRowEvent(dtBody,overRowTable){
-alert(1);
 		if(dtBody){
-alert(2);
 			var bodyTR = dtBody.getElementsByTagName('TR');
 			for(var i = 0; i < bodyTR.length; i++){
 				if($enableRowHoverStyle){
@@ -68,9 +66,7 @@ alert(2);
 					};
 				}
 				if($enableRowPressToShowList){
-alert(3);
 					bodyTR[i].onmousedown = function(){
-alert(4);
 						if($trPressTimer!=null) clearTimeout($trPressTimer);
 						var eachTR = this;
 						$trPressTimer = setTimeout(function(){
