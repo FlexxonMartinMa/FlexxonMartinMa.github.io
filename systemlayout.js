@@ -30,7 +30,6 @@ function runMyFunction(fcW,runTime){
 	console.log( (x?('Loaded Page '+(iPG?(iPG.value||'?'):1)+' of Data@ ['+(x.innerHTML||'?')+']!'):'') + ' ('+runTime+')');
 	
 	var bgProprety = 'background-color';
-	var hoverColor = 'LemonChiffon', activeColors = ['Gold','yellow'], selectColors = ['LawnGreen','PaleGreen'];
 	
 	//var dtTable = d.getElementById('ctl00_phG_grid_dataT0'), dtBody;
 	//if(dtTable) dtBody = dtTable.getElementsByTagName('TBODY')[0];
@@ -56,73 +55,77 @@ function runMyFunction(fcW,runTime){
 		if(dtBody){
 			var bodyTR = dtBody.getElementsByTagName('TR');
 			for(var i = 0; i < bodyTR.length; i++){
-				bodyTR[i].onmouseover = function(){
-					updateStyleToChildTD(this,bgProprety,hoverColor,activeColors,overRowTable);
-					this.style.backgroundColor = hoverColor;
-				};
-				bodyTR[i].onmouseout = function(){
-					updateStyleToChildTD(this,bgProprety,'',selectColors,overRowTable);
-					this.style.backgroundColor = '';
-				};
-				bodyTR[i].onmousedown = function(){
-					if($trPressTimer!=null) clearTimeout($trPressTimer);
-					var eachTR = this;
-					$trPressTimer = setTimeout(function(){
-						var eHeader = fcW.document.getElementById('ctl00_phG_grid_headerT');
-						var headerH = eHeader.getElementsByTagName('thead')[0], rHtml = '';
-						if(headerH){
-							rHtml += '<style> div#covertable { text-align:left; } div#covertable td { padding: 10px; }</style>';
-							rHtml += '<div id="covertable">';
-							rHtml += '<table border="1" cellpadding="0" cellspacing="0" style="border-color:#000;">';
-							rHtml += '<tbody>';
-							var headTDs = headerH.getElementsByTagName('TD'), ahTD = [], abTD = [];
-							var thisTDs = eachTR.getElementsByTagName('TD');
-							for(var ii = 0; ii < thisTDs.length; ii++){
-								ahTD[ii] = (headTDs[ii].innerHTML||'').replace(/<[^>]*>?/gm,' ').replace(/\u00a0/g,' ').replace(/(^\s+|\s+$)/g,'');
-								if(ahTD[ii] != ''){
-									rHtml += '<tr>';
-									rHtml += '<td style="color:#fff;background:CadetBlue;">'+ahTD[ii]+'</td>';
-									abTD[ii] = (thisTDs[ii].innerHTML||'').replace(/<[^>]*>?/gm,' ').replace(/\u00a0/g,' ').replace(/(^\s+|\s+$)/g,'');
-									rHtml += '<td style="background:'+(abTD[ii]==''||abTD[ii]==' '||abTD[ii]=='&nbsp;'||abTD[ii]==String.fromCharCode(160)?'#eee':'HoneyDew;color:DarkBlue')+';">'+abTD[ii]+'</td>';
-									rHtml += '</tr>';
+				if($enableRowHoverStyle){
+					bodyTR[i].onmouseover = function(){
+						updateStyleToChildTD(this,bgProprety,$hoverColor,$activeColors,overRowTable);
+						this.style.backgroundColor = $hoverColor;
+					};
+					bodyTR[i].onmouseout = function(){
+						updateStyleToChildTD(this,bgProprety,'',$selectColors,overRowTable);
+						this.style.backgroundColor = '';
+					};
+				}
+				if($enableRowPressToShowList){
+					bodyTR[i].onmousedown = function(){
+						if($trPressTimer!=null) clearTimeout($trPressTimer);
+						var eachTR = this;
+						$trPressTimer = setTimeout(function(){
+							var eHeader = fcW.document.getElementById('ctl00_phG_grid_headerT');
+							var headerH = eHeader.getElementsByTagName('thead')[0], rHtml = '';
+							if(headerH){
+								rHtml += '<style> div#covertable { text-align:left; } div#covertable td { padding: 10px; }</style>';
+								rHtml += '<div id="covertable">';
+								rHtml += '<table border="1" cellpadding="0" cellspacing="0" style="border-color:#000;">';
+								rHtml += '<tbody>';
+								var headTDs = headerH.getElementsByTagName('TD'), ahTD = [], abTD = [];
+								var thisTDs = eachTR.getElementsByTagName('TD');
+								for(var ii = 0; ii < thisTDs.length; ii++){
+									ahTD[ii] = (headTDs[ii].innerHTML||'').replace(/<[^>]*>?/gm,' ').replace(/\u00a0/g,' ').replace(/(^\s+|\s+$)/g,'');
+									if(ahTD[ii] != ''){
+										rHtml += '<tr>';
+										rHtml += '<td style="color:#fff;background:CadetBlue;">'+ahTD[ii]+'</td>';
+										abTD[ii] = (thisTDs[ii].innerHTML||'').replace(/<[^>]*>?/gm,' ').replace(/\u00a0/g,' ').replace(/(^\s+|\s+$)/g,'');
+										rHtml += '<td style="background:'+(abTD[ii]==''||abTD[ii]==' '||abTD[ii]=='&nbsp;'||abTD[ii]==String.fromCharCode(160)?'#eee':'HoneyDew;color:DarkBlue')+';">'+abTD[ii]+'</td>';
+										rHtml += '</tr>';
+									}
 								}
+								rHtml += '</tbody>';
+								rHtml += '</table>';
+								rHtml += '</div>';
 							}
-							rHtml += '</tbody>';
-							rHtml += '</table>';
-							rHtml += '</div>';
-						}
-						showAlertBodyLoading2(rHtml,'#000',4,closeBodyLoading2,3);
-					},900);
-					return false;
-				};
-				bodyTR[i].onmouseup = function(){
-					clearTimeout($trPressTimer);
-					$trPressTimer = null;
-					return false;
-				};
+							showAlertBodyLoading2(rHtml,'#000',4,closeBodyLoading2,3);
+						},900);
+						return false;
+					};
+					bodyTR[i].onmouseup = function(){
+						clearTimeout($trPressTimer);
+						$trPressTimer = null;
+						return false;
+					};
+				}
 			}
 		}
 	}
-	var outerDiv = d.getElementById('ctl00_phG_grid_scrollDiv');
-	var dtTables = outerDiv.getElementsByTagName('TABLE'), tBody = [], childTDs = [];
-	for(var i=0; i<dtTables.length; i++){
-		tBody[i] = dtTables[i].getElementsByTagName('tbody')[0];
-		if(tBody[i]) setRowEvent(tBody[i],(dtTables[i].className=='RowNavigator'?dtTables[i]:null));
-		if(dtTables[i].className=='RowNavigator'){
-			updateStyleToChildTD(tBody[i],bgProprety,null,selectColors,dtTables[i]);
-			dtTables[i].onclick = (function(eBody,eTable){
-				return function(){
-			    	setTimeout(function(){
-			    		updateStyleToChildTD(eBody,bgProprety,null,activeColors,eTable);
-			    	},60);
-				}
-			})(tBody[i],dtTables[i]);
+	if($enableRowHoverStyle){
+		var outerDiv = d.getElementById('ctl00_phG_grid_scrollDiv');
+		var dtTables = outerDiv.getElementsByTagName('TABLE'), tBody = [], childTDs = [];
+		for(var i=0; i<dtTables.length; i++){
+			tBody[i] = dtTables[i].getElementsByTagName('tbody')[0];
+			if(tBody[i]) setRowEvent(tBody[i],(dtTables[i].className=='RowNavigator'?dtTables[i]:null));
+			if(dtTables[i].className=='RowNavigator'){
+				updateStyleToChildTD(tBody[i],bgProprety,null,$selectColors,dtTables[i]);
+				dtTables[i].onclick = (function(eBody,eTable){
+					return function(){
+					setTimeout(function(){
+						updateStyleToChildTD(eBody,bgProprety,null,$activeColors,eTable);
+					},60);
+					}
+				})(tBody[i],dtTables[i]);
+			}
 		}
 	}
 	closeBodyLoading();
 }
-
-
 
 
 //============================================================
@@ -412,7 +415,7 @@ function runMyFunction(fcW,runTime){
 var $dataRunTime = 0, $dataInterval = null;
 var $getDataTimer = null, $ccDataTimer = 0;
 function waitingDataReady(fcW,ms){
-	openBodyLoading();
+	if($enableLoadingCover) openBodyLoading();
 	$ccDataTimer++;
 	if($getDataTimer!=null) clearTimeout($getDataTimer);
 	if($ccDataTimer>600){
