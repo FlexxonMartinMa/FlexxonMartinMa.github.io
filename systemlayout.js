@@ -85,7 +85,7 @@ function runMyFunction(fcW,runTime){
 										rHtml += '<tr>';
 										rHtml += '<td style="color:#fff;background:CadetBlue;">'+ahTD[ii]+'</td>';
 										abTD[ii] = (thisTDs[ii].innerHTML||'').replace(/<[^>]*>?/gm,' ').replace(/\u00a0/g,' ').replace(/(^\s+|\s+$)/g,'');
-										rHtml += '<td style="position:relative;"><i title="Copy data as [text]." onclick="return copyToClipboard(this,&quot;&quot;);">[&#10064;&nbsp;COPY]</i></td>';
+										rHtml += '<td style="position:relative;"><i title="Copy data as [text]." onclick="return copyToClipboard(this,&quot;'+abTD[ii]+'&quot;);">[&#10064;&nbsp;COPY]</i></td>';
 										rHtml += '<td style="background:'+(abTD[ii]==''||abTD[ii]==' '||abTD[ii]=='&nbsp;'||abTD[ii]==String.fromCharCode(160)?'#eee':'HoneyDew;color:DarkBlue')+';">'+abTD[ii]+'</td>';
 										rHtml += '</tr>';
 									}
