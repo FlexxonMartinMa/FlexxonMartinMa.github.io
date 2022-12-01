@@ -70,8 +70,8 @@ function runMyFunction(fcW,runTime){
 						if($trPressTimer!=null) clearTimeout($trPressTimer);
 						var eachTR = this;
 						$trPressTimer = setTimeout(function(){
-							var eHeader = fcW.document.getElementById('ctl00_phG_grid_headerT');
-							var headerH = eHeader.getElementsByTagName('thead')[0], rHtml = '';
+							var eHeader = fcW.document.getElementById('ctl00_phG_grid_headerT'), headerH;
+							if(eHeader) headerH = eHeader.getElementsByTagName('thead')[0], rHtml = '';
 							if(headerH){
 								rHtml += '<style> div#covertable { text-align:left; } div#covertable td { padding: 10px; }</style>';
 								rHtml += '<div id="covertable">';
@@ -93,8 +93,10 @@ function runMyFunction(fcW,runTime){
 								rHtml += '</tbody>';
 								rHtml += '</table>';
 								rHtml += '</div>';
+								showAlertBodyLoading2(rHtml,'#000',4,closeBodyLoading2,3);
+							} else {
+								warningAlert2('Sorry! Unexpected Error - [Header/Table is not found].');
 							}
-							showAlertBodyLoading2(rHtml,'#000',4,closeBodyLoading2,3);
 						},900);
 						return false;
 					};
