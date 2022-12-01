@@ -27,7 +27,7 @@ function runMyFunction(fcW,runTime){
 	var d = fcW.document;
 	var x = d.getElementById('usrTitle');
 	var iPG = d.getElementById('ctl00_phG_grid_ab_edPi');
-	console.log( (x?('Loaded Page '+(iPG?(iPG.value||'?'):1)+' of Data@ ['+(x.innerHTML||'?')+']!'):'') + ' ('+runTime+')');
+	console.log( 'UserJS: '+(x?('Loaded Page '+(iPG?(iPG.value||'?'):1)+' of Data@ ['+(x.innerHTML||'?')+']!'):'') + ' ('+runTime+')');
 	
 	var bgProprety = 'background-color';
 	
@@ -127,7 +127,8 @@ function runMyFunction(fcW,runTime){
 			}
 		}
 	}
-	if($dataRunTime==1){
+	var u = d.getElementById('inputcopyzone');
+	if(!u){
 		var xScript = 'var $pageCopiedText = ""; ';
 		xScript += 'window.addEventListener("copy", function(ev){';
 		xScript += '  ev.preventDefault();';
@@ -163,8 +164,7 @@ function runMyFunction(fcW,runTime){
 		xScript += '  }';
 		xScript += '  return false;';
 		xScript += '}';
-
-		var u = d.createElement('DIV');
+		u = d.createElement('DIV');
 		u.style.cssText = 'position:fixed;top:0;left:0;height:0px;width:0px;overflow:hidden;';
 		u.innerHTML = '<input id="inputcopyzone" type="text" value="" style="display:none;" size="1"/>';
 		d.body.appendChild(u);
@@ -408,7 +408,7 @@ function runMyFunction(fcW,runTime){
   }
 //============================================================
 //============================================================
-var $dataRunTime = 0, $dataInterval = null;
+var $dataTryTime = 0, $dataInterval = null;
 var $getDataTimer = null, $ccDataTimer = 0;
 function waitingDataReady(fcW,ms){
 	if($enableLoadingCover) openBodyLoading();
@@ -445,10 +445,10 @@ function waitingDataReady(fcW,ms){
 					waitingDataReady(fcW,600);
 				}
 			},600);
-			$dataRunTime++;
-			console.log('UserJS: 7 - Table Data Ready! '+'('+$dataRunTime+')');
+			$dataTryTime++;
+			console.log('UserJS: 7 - Table Data Ready! '+'('+$dataTryTime+')');
 			d.getElementById('ctl00_phG_grid_newRow').className = 'readyacumaticadatetable';
-			runMyFunction(fcW,$dataRunTime);
+			runMyFunction(fcW,$dataTryTime);
 		} else {
 			waitingDataReady(fcW,600);
 		}
