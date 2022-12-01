@@ -85,7 +85,7 @@ function runMyFunction(fcW,runTime){
 										rHtml += '<tr>';
 										rHtml += '<td style="color:#fff;background:CadetBlue;">'+ahTD[ii]+'</td>';
 										abTD[ii] = (thisTDs[ii].innerHTML||'').replace(/<[^>]*>?/gm,' ').replace(/\u00a0/g,' ').replace(/(^\s+|\s+$)/g,'');
-										rHtml += '<td style="position:relative;"><i title="Copy data as [text]." onclick="return copyToClipboard(this,&quot;'+abTD[ii]+'&quot;);" style="color:blue;cursor:pointer;">[&#10064;&nbsp;COPY]</i></td>';
+										rHtml += '<td style="position:relative;"><button type="button" title="Copy data as [text]." onclick="return doCopyToClipboard(this,&quot;'+abTD[ii]+'&quot;);" style="cursor:pointer;">[&#10064;&nbsp;COPY]</button></td>';
 										rHtml += '<td style="background:'+(abTD[ii]==''||abTD[ii]==' '||abTD[ii]=='&nbsp;'||abTD[ii]==String.fromCharCode(160)?'#eee':'HoneyDew;color:DarkBlue')+';">'+abTD[ii]+'</td>';
 										rHtml += '</tr>';
 									}
@@ -140,7 +140,7 @@ window.addEventListener('copy', function(ev){
   ev.preventDefault();
   ev.clipboardData.setData('text/plain', $pageCopiedText);
 });
-function copyToClipboard(e,v){
+function doCopyToClipboard(e,v){
   if(e&&v){
     var d = document;
     var x = d.getElementById("inputcopyzone");
