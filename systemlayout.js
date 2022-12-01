@@ -131,8 +131,10 @@ function runMyFunction(fcW,runTime){
 	if(!u){
 		var xScript = 'var $pageCopiedText = ""; ';
 		xScript += 'window.addEventListener("copy", function(ev){';
-		xScript += '  ev.preventDefault();';
-		xScript += '  ev.clipboardData.setData("text/plain",$pageCopiedText);';
+		xScript += '  if($pageCopiedText!=""){';
+		xScript += '    ev.preventDefault();';
+		xScript += '    ev.clipboardData.setData("text/plain",$pageCopiedText);';
+		xScript += '  }';
 		xScript += '}); ';
 		xScript += 'function doCopyToClipboard(e,v){';
 		xScript += '  if(e&&v){';
@@ -151,7 +153,7 @@ function runMyFunction(fcW,runTime){
 		xScript += '      c = "red";';
 		xScript += '      t = "Error!";';
 		xScript += '    }';
-		xScript += '    x.style.display = "none"; x.value="";';
+		xScript += '    x.style.display = "none"; x.value=""; $pageCopiedText="";';
 		xScript += '    e.style.visibility = "hidden";';
 		xScript += '    var a = d.createElement("SPAN");';
 		xScript += '    a.innerHTML = t;';
@@ -166,7 +168,7 @@ function runMyFunction(fcW,runTime){
 		xScript += '}';
 		u = d.createElement('DIV');
 		u.style.cssText = 'position:fixed;top:0;left:0;height:0px;width:0px;overflow:hidden;';
-		u.innerHTML = '<input id="inputcopyzone" type="text" value="" style="display:none;" size="1"/>';
+		u.innerHTML = '<input id="inputcopyzone" type="text" value="" style="display:none;" size="1" readonly/>';
 		d.body.appendChild(u);
 		var s = d.createElement('SCRIPT');
 		s.type = 'application/javascript';
