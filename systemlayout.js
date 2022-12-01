@@ -85,6 +85,7 @@ function runMyFunction(fcW,runTime){
 										rHtml += '<tr>';
 										rHtml += '<td style="color:#fff;background:CadetBlue;">'+ahTD[ii]+'</td>';
 										abTD[ii] = (thisTDs[ii].innerHTML||'').replace(/<[^>]*>?/gm,' ').replace(/\u00a0/g,' ').replace(/(^\s+|\s+$)/g,'');
+										rHtml += '<td style="position:relative;"><i title="Copy data as [text]." onclick="return copyToClipboard(this,&quot;&quot;);">[&#10064;&nbsp;COPY]</i></td>';
 										rHtml += '<td style="background:'+(abTD[ii]==''||abTD[ii]==' '||abTD[ii]=='&nbsp;'||abTD[ii]==String.fromCharCode(160)?'#eee':'HoneyDew;color:DarkBlue')+';">'+abTD[ii]+'</td>';
 										rHtml += '</tr>';
 									}
@@ -132,57 +133,41 @@ function runMyFunction(fcW,runTime){
 //============================================================
 //============================================================
 //============================================================
-  var xhttpRequestOption = {
-    method: 'GET',    //'GET'or'POST'or'PUT'.
-    success: function(responsedText,responseXML){},    //function.
-    failure: function(failStatus){},    //function.
-    urlsending: '......',
-    content_type: 'application/x-www-form-urlencoded',  //for POST method only. //'application/json'
-    textparameter: ''
-  }
-  var $xHttpRequestArray = [];
-  function xhttpSendingRequest(opts){
-    var sendMethod = (opts.method||'').toUpperCase();
-    if(sendMethod=='GET'||sendMethod=='POST'||sendMethod=='PUT'){
-      //var xhttp;
-      var i = $xHttpRequestArray.length;
-      if(window.XMLHttpRequest){
-        $xHttpRequestArray[i] = new XMLHttpRequest();
-      } else {
-        $xHttpRequestArray[i] = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      $xHttpRequestArray[i].onreadystatechange = function(){
-        if(this.readyState == 4){
-          if(this.status == 200){
-            opts.success(this.responseText,this.responseXML);
-          }
-          if(this.status != 200){
-            opts.failure(this.status);
-          }
-          $xHttpRequestArray[i] = null;
-        }
-      }
-      var xPmtr = opts.textparameter;
-      $xHttpRequestArray[i].open(sendMethod,opts.urlsending+((sendMethod=='GET'&&xPmtr)?('?'+xPmtr):''),true);
-      if((sendMethod=='POST'||sendMethod=='PUT')&&opts.content_type){
-        //Send the proper header information along with the request
-        $xHttpRequestArray[i].setRequestHeader('Content-type', opts.content_type);
-        $xHttpRequestArray[i].setRequestHeader('Access-Control-Allow-Origin', '*');
-      }
-      $xHttpRequestArray[i].send((((sendMethod=='POST'||sendMethod=='PUT')&&xPmtr)?(xPmtr):''));
+var $pageCopiedText = '';
+window.addEventListener('copy', function(ev){
+  ev.preventDefault();
+  ev.clipboardData.setData('text/plain', $pageCopiedText);
+});
+function copyToClipboard(e,v){
+  if(e&&v){
+    var d = document;
+    var x = d.getElementById("inputcopyzone");
+    x.value = v||'';
+    x.style.display = 'block';
+    x.focus(); x.select();
+    x.setSelectionRange(0, 99999);
+    var c = 'green', t = 'Link Copied (已複製連結)!';
+    try {
+      $pageCopiedText = x.value;
+      d.execCommand('copy');
+      navigator.clipboard.writeText(x.value);
+    } catch(err){
+      c = 'red';
+      t = 'Oops! Copy Fail (抱歉！複製錯誤)';
     }
+    x.style.display = 'none'; x.value='';
+    e.style.visibility = 'hidden';
+    var a = d.createElement('SPAN');
+    a.innerHTML = t;
+    a.style.cssText = 'display:block;position:absolute;top:'+(firstTagA.offsetTop||0)+'px;left:'+(firstTagA.offsetLeft||0)+'px;color:'+c+';padding:1px 3px;background-color:FloralWhite;border:1px solid YellowGreen;overflow:hidden;';
+    e.parentNode.appendChild(a);
+    setTimeout(function(){
+      e.parentNode.removeChild(a);
+      e.style.visibility = 'visible';
+    },1200);
   }
-  function abortAllRequest(){
-    var n = $xHttpRequestArray.length;
-    for(var i=0;i<n;i++){
-      if($xHttpRequestArray[i]!==null){
-        $xHttpRequestArray[i].abort();
-        $xHttpRequestArray[i]=null;
-      }
-    }
-    $xHttpRequestArray=[];
-    closeBodyLoading();
-  }
+  return false;
+}
 //============================================================
 //============================================================
   function createLoadingCover(opts){
