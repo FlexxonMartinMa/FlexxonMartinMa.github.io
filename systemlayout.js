@@ -85,7 +85,7 @@ function runMyFunction(fcW,runTime){
 										rHtml += '<tr>';
 										rHtml += '<td style="color:#fff;background:CadetBlue;">'+ahTD[ii]+'</td>';
 										abTD[ii] = (thisTDs[ii].innerHTML||'').replace(/<[^>]*>?/gm,' ').replace(/\u00a0/g,' ').replace(/(^\s+|\s+$)/g,'');
-										rHtml += '<td style="position:relative;background:'+(abTD[ii]==''||abTD[ii]==' '||abTD[ii]=='&nbsp;'||abTD[ii]==String.fromCharCode(160)?'#eee;">':'HoneyDew;"><button type="button" title="Copy data as TEXT" style="cursor:pointer;">&#10064;&nbsp;COPY</button>')+'</td>';
+										rHtml += '<td style="position:relative;background:'+(abTD[ii]==''||abTD[ii]==' '||abTD[ii]=='&nbsp;'||abTD[ii]==String.fromCharCode(160)?'#eee;">':'HoneyDew;"><button type="button" title="Copy data as TEXT" style="cursor:pointer;" onclick="return doCopyToClipboard(this,&quot;'+abTD[ii]+'&quot;);">&#10064;&nbsp;COPY</button>')+'</td>';
 										rHtml += '<td style="background:'+(abTD[ii]==''||abTD[ii]==' '||abTD[ii]=='&nbsp;'||abTD[ii]==String.fromCharCode(160)?'#eee':'HoneyDew;color:DarkBlue')+';">'+abTD[ii]+'</td>';
 										rHtml += '</tr>';
 									}
@@ -94,10 +94,6 @@ function runMyFunction(fcW,runTime){
 								rHtml += '</table>';
 								rHtml += '</div>';
 								showAlertBodyLoading2(rHtml,'#000',4,closeBodyLoading2,3);
-								var coverTable = 
-								for(var ii = 0; ii < thisTDs.length; ii++){
-									onclick="return doCopyToClipboard(this,&quot;'+abTD[ii]+'&quot;);" 
-								}
 							} else {
 								warningAlert2('Sorry! Unexpected Error - [Header/Table is not found].');
 							}
