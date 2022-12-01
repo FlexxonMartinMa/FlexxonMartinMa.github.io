@@ -141,7 +141,7 @@ function runMyFunction(fcW,runTime){
 		xScript += '  if(e&&v){';
 		xScript += '    var d = document;';
 		xScript += '    var x = d.getElementById("inputcopyzone");';
-		xScript += '    var nV = v.toString().replace(/(^\\s+|\\s+$)/g,"").replace(/\\,/g,"")';
+		xScript += '    var nV = v.toString().replace(/(^\\s+|\\s+$)/g,"").replace(/\\,/g,"");';
 		xScript += '    x.value = (v.replace(/\\s/g,"")==""||isNaN(nV))?v:parseFloat(nV);';
 		xScript += '    x.style.display = "block";';
 		xScript += '    x.focus(); x.select();';
