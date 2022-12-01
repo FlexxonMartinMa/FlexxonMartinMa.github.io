@@ -85,7 +85,7 @@ function runMyFunction(fcW,runTime){
 										rHtml += '<tr>';
 										rHtml += '<td style="color:#fff;background:CadetBlue;">'+ahTD[ii]+'</td>';
 										abTD[ii] = (thisTDs[ii].innerHTML||'').replace(/<[^>]*>?/gm,' ').replace(/\u00a0/g,' ').replace(/(^\s+|\s+$)/g,'');
-										rHtml += '<td style="position:relative;background:'+(abTD[ii]==''||abTD[ii]==' '||abTD[ii]=='&nbsp;'||abTD[ii]==String.fromCharCode(160)?'#eee;">':'HoneyDew;"><button type="button" title="Copy data as TEXT" onclick="return doCopyToClipboard(this,&quot;'+abTD[ii]+'&quot;);" style="cursor:pointer;">&#10064;&nbsp;COPY</button>')+'</td>';
+										rHtml += '<td style="position:relative;background:'+(abTD[ii]==''||abTD[ii]==' '||abTD[ii]=='&nbsp;'||abTD[ii]==String.fromCharCode(160)?'#eee;">':'HoneyDew;"><button type="button" title="Copy data as TEXT" style="cursor:pointer;">&#10064;&nbsp;COPY</button>')+'</td>';
 										rHtml += '<td style="background:'+(abTD[ii]==''||abTD[ii]==' '||abTD[ii]=='&nbsp;'||abTD[ii]==String.fromCharCode(160)?'#eee':'HoneyDew;color:DarkBlue')+';">'+abTD[ii]+'</td>';
 										rHtml += '</tr>';
 									}
@@ -94,6 +94,10 @@ function runMyFunction(fcW,runTime){
 								rHtml += '</table>';
 								rHtml += '</div>';
 								showAlertBodyLoading2(rHtml,'#000',4,closeBodyLoading2,3);
+								var coverTable = 
+								for(var ii = 0; ii < thisTDs.length; ii++){
+									onclick="return doCopyToClipboard(this,&quot;'+abTD[ii]+'&quot;);" 
+								}
 							} else {
 								warningAlert2('Sorry! Unexpected Error - [Header/Table is not found].');
 							}
@@ -127,49 +131,53 @@ function runMyFunction(fcW,runTime){
 			}
 		}
 	}
+	
+	var xScript = 'var $pageCopiedText = ""; ';
+	xScript += 'window.addEventListener("copy", function(ev){';
+	xScript += '  ev.preventDefault();';
+	xScript += '  ev.clipboardData.setData("text/plain",$pageCopiedText);';
+	xScript += '}); ';
+	xScript += 'function doCopyToClipboard(e,v){';
+	xScript += '  if(e&&v){';
+	xScript += '    var d = document;';
+	xScript += '    var x = d.getElementById("inputcopyzone");';
+	xScript += '    x.value = v||"";';
+	xScript += '    x.style.display = "block";';
+	xScript += '    x.focus(); x.select();';
+	xScript += '    x.setSelectionRange(0, 99999);';
+	xScript += '    var c = "green", t = "Copied!";';
+	xScript += '    try {';
+	xScript += '      $pageCopiedText = x.value;';
+	xScript += '      d.execCommand("copy");';
+	xScript += '      navigator.clipboard.writeText(x.value);';
+	xScript += '    } catch(err){';
+	xScript += '      c = "red";';
+	xScript += '      t = "Error!";';
+	xScript += '    }';
+	xScript += '    x.style.display = "none"; x.value="";';
+	xScript += '    e.style.visibility = "hidden";';
+	xScript += '    var a = d.createElement("SPAN");';
+	xScript += '    a.innerHTML = t;';
+	xScript += '    a.style.cssText = "display:block;position:absolute;top:"+(e.offsetTop||0)+"px;left:"+(e.offsetLeft||0)+"px;color:"+c+";padding:1px 3px;background-color:FloralWhite;border:1px solid YellowGreen;overflow:hidden;";';
+	xScript += '    e.parentNode.appendChild(a);';
+	xScript += '    setTimeout(function(){';
+	xScript += '      e.parentNode.removeChild(a);';
+	xScript += '      e.style.visibility = "visible";';
+	xScript += '    },1200);';
+	xScript += '  }';
+	xScript += '  return false;';
+	xScript += '}';
+	
+	var s = d.createElement('SCRIPT');
+	s.type = 'application/javascript';
+	s.appendChild(d.createTextNode(xScript));
+	d.body.appendChild(s);
 	closeBodyLoading();
 }
 
 
 //============================================================
 //============================================================
-//============================================================
-//============================================================
-var $pageCopiedText = '';
-window.addEventListener('copy', function(ev){
-  ev.preventDefault();
-  ev.clipboardData.setData('text/plain', $pageCopiedText);
-});
-function doCopyToClipboard(e,v){
-  if(e&&v){
-    var d = document;
-    var x = d.getElementById("inputcopyzone");
-    x.value = v||'';
-    x.style.display = 'block';
-    x.focus(); x.select();
-    x.setSelectionRange(0, 99999);
-    var c = 'green', t = 'Link Copied (已複製連結)!';
-    try {
-      $pageCopiedText = x.value;
-      d.execCommand('copy');
-      navigator.clipboard.writeText(x.value);
-    } catch(err){
-      c = 'red';
-      t = 'Oops! Copy Fail (抱歉！複製錯誤)';
-    }
-    x.style.display = 'none'; x.value='';
-    e.style.visibility = 'hidden';
-    var a = d.createElement('SPAN');
-    a.innerHTML = t;
-    a.style.cssText = 'display:block;position:absolute;top:'+(firstTagA.offsetTop||0)+'px;left:'+(firstTagA.offsetLeft||0)+'px;color:'+c+';padding:1px 3px;background-color:FloralWhite;border:1px solid YellowGreen;overflow:hidden;';
-    e.parentNode.appendChild(a);
-    setTimeout(function(){
-      e.parentNode.removeChild(a);
-      e.style.visibility = 'visible';
-    },1200);
-  }
-  return false;
-}
 //============================================================
 //============================================================
   function createLoadingCover(opts){
