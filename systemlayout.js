@@ -134,6 +134,7 @@ function runMyFunction(fcW,runTime){
 		xScript += '  if($pageCopiedText!=""){';
 		xScript += '    ev.preventDefault();';
 		xScript += '    ev.clipboardData.setData("text/plain",$pageCopiedText);';
+		xScript += '    console.log("UserJS: Copied ["+$pageCopiedText+"]");';
 		xScript += '  }';
 		xScript += '}); ';
 		xScript += 'function doCopyToClipboard(e,v){';
