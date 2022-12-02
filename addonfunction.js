@@ -23,19 +23,17 @@ console.log('UserJS: 2 - Script Loaded!');
 //============================================================
 
 
-function runMyFunction(runTime){
+function runMyFunction(runTime,addNameId){
 	var d = document;
 	var x = d.getElementById('usrTitle');
-	var iPG = d.getElementById('ctl00_phG_grid_ab_edPi');
+	var iPG = d.getElementById('ctl00_phG_'+(addNameId||'')+'grid_ab_edPi');
 	console.log( 'UserJS: '+(x?('Loaded Page '+(iPG?(iPG.value||'?'):1)+' of Data@ ['+(x.innerHTML||'?')+']!'):'') + ' ('+runTime+')');
 	
 	var bgProprety = 'background-color';
 	
-	//var dtTable = d.getElementById('ctl00_phG_grid_dataT0'), dtBody;
-	//if(dtTable) dtBody = dtTable.getElementsByTagName('TBODY')[0];
-	//Last TR is empty row. 
+	//Last TR in the Data Table is empty row. 
 	//Correct TR length is dataTableBody.getElementsByTagName('TR').length-1.
-	$trPressTimer = null;
+	var $trPressTimer = null;
 	function updateStyleToChildTD(e,propertyName,propertyValue,activeColorArray,overRowTable){
 		var childTDs = e.getElementsByTagName('TD');
 		for(var i = 0; i < childTDs.length; i++){
@@ -70,7 +68,7 @@ function runMyFunction(runTime){
 						if($trPressTimer!=null) clearTimeout($trPressTimer);
 						var eachTR = this;
 						$trPressTimer = setTimeout(function(){
-							var eHeader = document.getElementById('ctl00_phG_grid_headerT'), headerH;
+							var eHeader = document.getElementById('ctl00_phG_'+(addNameId||'')+'grid_headerT'), headerH;
 							if(eHeader) headerH = eHeader.getElementsByTagName('thead')[0], rHtml = '';
 							if(headerH){
 								rHtml += '<style> div#covertable { text-align:left; } div#covertable td { padding: 10px; }</style>';
@@ -109,7 +107,7 @@ function runMyFunction(runTime){
 			}
 		}
 	}
-	var outerDiv = d.getElementById('ctl00_phG_grid_scrollDiv');
+	var outerDiv = d.getElementById('ctl00_phG_'+(addNameId||'')+'grid_scrollDiv');
 	var dtTables = outerDiv.getElementsByTagName('TABLE'), tBody = [], childTDs = [];
 	for(var i=0; i<dtTables.length; i++){
 		tBody[i] = dtTables[i].getElementsByTagName('tbody')[0];
@@ -133,58 +131,67 @@ function runMyFunction(runTime){
 //============================================================
 //============================================================
 //============================================================
-var $dataTryTime = 0, $dataInterval = null;
-var $getDataTimer = null, $ccDataTimer = 0;
-function waitingDataReady(ms){
+var $dataTryTime = [], $dataInterval = [];
+var $getDataTimer = [], $ccDataTimer = [];
+function waitingDataReady(ms,idx,addNameId){
+	var rIdx = (idx||0) - 1;
 	if($enableLoadingCover) openBodyLoading();
-	$ccDataTimer++;
-	if($getDataTimer!=null) clearTimeout($getDataTimer);
-	if($ccDataTimer>600){
-		clearTimeout($getDataTimer); $getDataTimer = null;
+	$ccDataTimer[rIdx] = ($ccDataTimer[rIdx]||0) + 1;
+	if($getDataTimer[rIdx]!=null) clearTimeout($getDataTimer[rIdx]);
+	if($ccDataTimer[rIdx]>600){
+		clearTimeout($getDataTimer[rIdx]); $getDataTimer[rIdx] = null;
 		alert('UserJS: Data Load Timeout!');
 		return;
 	}
-	$getDataTimer = setTimeout(function(){
+	$getDataTimer[rIdx] = setTimeout(function(){
 		var d = document;
-		var dtOuter = d.getElementById('ctl00_phG_grid_scrollDiv');
+		var dtOuter = d.getElementById('ctl00_phG_'+(addNameId||'')+'grid_scrollDiv');
 		if(!dtOuter){
 			console.log('DIV#ctl00_phG_grid_scrollDiv is not found!');
 			return;
 		}
-		var trData0 = d.getElementById('ctl00_phG_grid_row_0');
+		var trData0 = d.getElementById('ctl00_phG_'+(addNameId||'')+'grid_row_0');
 		var inDivElms = dtOuter.getElementsByTagName('DIV'), dClass = [], emptyCC = 0;
 		for(var i=0; i<inDivElms.length;i++){
 			dClass[i] = inDivElms[i].className||'';
 			if(dClass[i].indexOf('empty-')===0) emptyCC++;
 		}
 		if(trData0 || emptyCC>0){
-			clearTimeout($getDataTimer); $getDataTimer = null;
+			clearTimeout($getDataTimer[rIdx]); $getDataTimer[rIdx] = null;
 			var oTrLength = dtOuter.getElementsByTagName('TR').length;
-			$dataInterval = setInterval(function(){
+			$dataInterval[rIdx] = setInterval(function(){
 				var nTrLength = dtOuter.getElementsByTagName('TR').length;
-				var dtNewRow = d.getElementById('ctl00_phG_grid_newRow');
+				var dtNewRow = d.getElementById('ctl00_phG_'+(addNameId||'')+'grid_newRow');
 				var checkClass = dtNewRow?(dtNewRow.className||''):'';
 				if(oTrLength != nTrLength || checkClass!='readyacumaticadatetable'){
-					clearInterval( $dataInterval );
-					$dataInterval = null;
-					waitingDataReady(600);
+					clearInterval( $dataInterval[rIdx] );
+					$dataInterval[rIdx] = null;
+					waitingDataReady(600,idx,addNameId);
 				}
 			},600);
-			$dataTryTime++;
-			console.log('UserJS: 7 - Table Data Ready! '+'('+$dataTryTime+')');
-			d.getElementById('ctl00_phG_grid_newRow').className = 'readyacumaticadatetable';
-			runMyFunction($dataTryTime);
+			$dataTryTime[rIdx] = ($dataTryTime[rIdx]||0) + 1;
+			console.log('UserJS: 7 - Table Data Ready! '+'('+$dataTryTime[rIdx]+')');
+			d.getElementById('ctl00_phG_'+(addNameId||'')+'grid_newRow').className = 'readyacumaticadatetable';
+			runMyFunction($dataTryTime[rIdx],addNameId);
 		} else {
-			waitingDataReady(600);
+			waitingDataReady(600,idx,addNameId);
 		}
 	},ms);
 }
 
 function initializeFrameData(){
-	var dataTable = document.getElementById('ctl00_phG_grid_dataT0');
-	if(dataTable){
-		console.log('UserJS: 6 - Got Data Table!');
-		waitingDataReady(60);
+	var d = document;
+	var dataTable1 = d.getElementById('ctl00_phG_grid_dataT0');
+	if(dataTable1){
+		console.log('UserJS: 6a - Got Data Table [Grid]!');
+		$getDataTimer[0] = null;
+		waitingDataReady(60,1);
+	}
+	var dataTable2 = d.getElementById('ctl00_phG_tab_t0_grid_dataT0');
+	if(dataTable2){
+		console.log('UserJS: 6b - Got Data Table [Tab-Grid]!');
+		$getDataTimer[1] = null;
+		waitingDataReady(60,2,'tab_t0_');
 	}
 }
 
