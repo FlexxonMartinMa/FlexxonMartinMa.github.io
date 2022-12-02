@@ -211,24 +211,14 @@ function timerGetTitle(ms){
 	}, ms);
 }
 
-function createCoverDIV(id){
-	var d = document;
-	var e = d.createElement('DIV');
-	d.body.appendChild(e);
-	e.style.cssText = 'display:none;position:fixed;top:0px;left:0px;height:100%;width:100%;overflow:hidden;z-index:999000;';
-	e.id = id||'';
-}
-
 (function(){
 	console.log('UserJS: 3 - Addon Function Loaded!');
 	var pageTitle = document.getElementById('page-caption');
 	if(pageTitle){
 		console.log('UserJS: 4 - Got Frame Title Wrapper!');
 		timerGetTitle(600);
-		createCoverDIV('bodycover');
-		createCoverDIV('bodycover2');
 	} else {
-		alert('UserJS: Page Caption Not Found!');
+		console.error('UserJS: 4 - Page Caption Not Found!');
 	}
 })();
 
