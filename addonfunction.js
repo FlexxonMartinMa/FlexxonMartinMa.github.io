@@ -25,6 +25,9 @@ function specificScreenFunction(addNameId){
 	var oScreenId = __screenID.replace(/\./g,'').toString();
 	
 	var screenId_CriticalMaterial = 'AM401000';
+	
+console.log([oScreenId,screenId_CriticalMaterial,oScreenId==screenId_CriticalMaterial]);
+	
 	if(oScreenId==screenId_CriticalMaterial && $enableMRP_CriticalMaterialQtyInfo){
 		
 		
