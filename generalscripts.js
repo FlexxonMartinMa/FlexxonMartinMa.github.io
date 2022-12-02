@@ -410,10 +410,18 @@ function cloneObject(oObj){
 }
 //------------------------------------------------------------
 //------------------------------------------------------------
+function createCoverDIV(id){
+	var d = document, e = d.createElement('DIV');
+	d.body.appendChild(e);
+	e.style.cssText = 'display:none;position:fixed;top:0px;left:0px;height:100%;width:100%;overflow:hidden;z-index:999000;';
+	e.id = id||'';
+}
 (function(){
 	console.log('UserJS: 2 - General Script Loaded!');
-	var d = document;
-	var mainScript = d.createElement('SCRIPT'), dTime = (new Date()).getTime();
+	createCoverDIV('bodycover');
+	createCoverDIV('bodycover2');
+	var d = document, dTime = (new Date()).getTime();
+	var mainScript = d.createElement('SCRIPT');
 	mainScript.type = 'text/javascript';
 	mainScript.src = 'https://flexxonmartinma.github.io/addonfunction.js?tt='+dTime;
 	d.body.appendChild(mainScript);
