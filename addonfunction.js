@@ -21,7 +21,18 @@ console.log('UserJS: 2 - Script Loaded!');
 	*/
 //============================================================
 //============================================================
-
+function specificScreenFunction(addNameId){
+	var oScreenId = __screenID.replace(/\./g,'').toString();
+	
+	var screenId_CriticalMaterial = 'AM401000';
+	if(oScreenId==screenId_CriticalMaterial && $enableMRP_CriticalMaterialQtyInfo){
+		
+		
+		alert(addNameId);
+		
+		console.log('UserJS: Loaded Function for Screen of [Critical Material]!');
+	}
+}
 
 function runMyFunction(runTime,addNameId){
 	var d = document;
@@ -30,6 +41,7 @@ function runMyFunction(runTime,addNameId){
 	console.log( 'UserJS: '+(x?('Loaded Page '+(iPG?(iPG.value||'?'):1)+' of Data@ ['+(x.innerHTML||'?')+']!'):'') + ' ('+runTime+')');
 	
 	var bgProprety = 'background-color';
+	specificScreenFunction(addNameId);
 	
 	//Last TR in the Data Table is empty row. 
 	//Correct TR length is dataTableBody.getElementsByTagName('TR').length-1.
