@@ -412,7 +412,8 @@ function cloneObject(oObj){
 //------------------------------------------------------------
 (function(){
 	console.log('UserJS: 2 - General Script Loaded!');
-	var mainScript = document.createElement('SCRIPT'), dTime = (new Date()).getTime();
+	var d = document;
+	var mainScript = d.createElement('SCRIPT'), dTime = (new Date()).getTime();
 	mainScript.type = 'text/javascript';
 	mainScript.src = 'https://flexxonmartinma.github.io/addonfunction.js?tt='+dTime;
 	d.body.appendChild(nScript);
