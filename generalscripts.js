@@ -354,6 +354,52 @@ function xhttpSendingRequest(opts){
 }
 //------------------------------------------------------------
 //------------------------------------------------------------
+var $pageCopiedText = "";
+window.addEventListener("copy", function(ev){
+  if($pageCopiedText!=""){
+    ev.preventDefault();
+    ev.clipboardData.setData("text/plain",$pageCopiedText);
+    console.log("UserJS: Copied ["+$pageCopiedText+"]");
+  }
+});
+function doCopyToClipboard(e,v){
+  var d = document;
+  var u = d.getElementById('inputcopyzone');
+  if(!u){
+	u = d.createElement('DIV');
+	u.style.cssText = 'position:fixed;top:0;left:0;height:0px;width:0px;overflow:hidden;';
+	u.innerHTML = '<input id="inputcopyzone" type="text" value="" style="display:none;" size="1" readonly/>';
+	d.body.appendChild(u);
+  }
+  if(e&&v){
+    var x = d.getElementById("inputcopyzone");
+    var nV = v.toString().replace(/(^\\s+|\\s+$)/g,"").replace(/\\,/g,"");
+    x.value = (v.replace(/\\s/g,"")==""||isNaN(nV))?v:parseFloat(nV);
+    x.style.display = "block";
+    x.focus(); x.select();
+    x.setSelectionRange(0, 99999);
+    var c = "green", t = "Copied!";
+    try {
+      $pageCopiedText = x.value;
+      d.execCommand("copy");
+      navigator.clipboard.writeText(x.value);
+    } catch(err){
+      c = "red";
+      t = "Error!";
+    }
+    x.style.display = "none"; x.value=""; $pageCopiedText="";
+    e.style.visibility = "hidden";
+    var a = d.createElement("SPAN");
+    a.innerHTML = t;
+    a.style.cssText = "display:block;position:absolute;top:"+(e.offsetTop||0)+"px;left:"+(e.offsetLeft||0)+"px;color:"+c+";padding:1px 3px;background-color:FloralWhite;border:1px solid YellowGreen;overflow:hidden;";
+    e.parentNode.appendChild(a);
+    setTimeout(function(){
+      e.parentNode.removeChild(a);
+      e.style.visibility = "visible";
+    },1200);
+  }
+  return false;
+}
 function cloneObject(oObj){
   if (oObj == null || typeof oObj != 'object') return oObj;
   var cObject = oObj.constructor();
