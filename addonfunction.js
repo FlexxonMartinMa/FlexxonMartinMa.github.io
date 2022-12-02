@@ -176,8 +176,8 @@ function waitingDataReady(ms,idx,addNameId){
 			var oTrLength = dtOuter.getElementsByTagName('TR').length;
 			$dataInterval[rIdx] = setInterval(function(){
 				var nTrLength = dtOuter.getElementsByTagName('TR').length;
-				var dtNewRow = d.getElementById('ctl00_phG_'+(addNameId||'')+'grid_row_0');
-				var checkClass = dtNewRow?(dtNewRow.className||''):'';
+				var checkElm = d.getElementById('ctl00_phG_'+(addNameId||'')+'grid_'+(trData0?'row_0'||'newRow'));
+				var checkClass = checkElm?(checkElm.className||''):'';
 				if(oTrLength != nTrLength || checkClass!='readyacumaticadatetable'){
 					clearInterval( $dataInterval[rIdx] );
 					$dataInterval[rIdx] = null;
@@ -186,7 +186,7 @@ function waitingDataReady(ms,idx,addNameId){
 			},600);
 			$dataTryTime[rIdx] = ($dataTryTime[rIdx]||0) + 1;
 			console.log('UserJS: 7 - Table Data Ready! '+'('+$dataTryTime[rIdx]+')');
-			d.getElementById('ctl00_phG_'+(addNameId||'')+'grid_row_0').className = 'readyacumaticadatetable';
+			d.getElementById('ctl00_phG_'+(addNameId||'')+'grid_'+(trData0?'row_0'||'newRow')).className = 'readyacumaticadatetable';
 			runMyFunction($dataTryTime[rIdx],addNameId);
 		} else {
 			waitingDataReady(600,idx,addNameId);
