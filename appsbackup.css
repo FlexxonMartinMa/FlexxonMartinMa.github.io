@@ -1,0 +1,731 @@
+/*
+  https://www.w3schools.com/tags/ref_colornames.asp
+*/
+
+:root {
+	/* Top Menu */
+	--main: RebeccaPurple;
+	--mainhoverdark: Indigo;
+	--mainhoverbright: DarkViolet;
+	--mainpressed: MediumPurple;
+	--mainhoverpressed: BlueViolet;
+	--topmenubackground: Lavender;
+	--branchnamehoverbackground: MediumSlateBlue;
+	--profilebuttonbackground: SlateBlue;
+	--profilebuttonhoverbackground: DarkSlateBlue;
+	--logoutbuttonbackground:red;
+	--logoutbuttonhoverbackground:FireBrick;
+	--logobackground: Lavender;
+	--logohoverbackground: MediumOrchid;
+	--iconbackground: DarkMagenta;
+	--iconhoverbackground: BlueViolet;
+	
+	/* Side Menu */
+	--sidebackground: MediumPurple;
+	--sidebuttonbackground: Indigo;
+	--sidebuttonicon: pink;
+	--sidebuttontext: yellow;
+	--sidehoverbuttonbackground: IndianRed;
+	--sidehoverbuttonicon: yellow;
+	--sidehoverbuttontext: LavenderBlush;
+	--sidepressedbuttonbackground: DarkCyan;
+	--sidepressedbuttonicon: gold;
+	--sidepressedbuttontext: white;
+	--sidehidebuttonbackground: Gainsboro
+	--sidehidebuttontext: MediumOrchid;
+	--sidehoverhidebuttontext: yellow;
+	
+	/* Open Menu */
+	
+	
+	
+}
+
+
+/* =============== */
+/* === Top Bar === */
+/* =============== */
+
+form div.navbar.master {
+  background-color: var(--main);
+}
+
+form div#navBarMaster li.logo-button {
+  background: var(--logobackground);
+  border-width: 2px 1px 1px 2px;
+  border-color: var(--main);
+  border-style: solid;
+}
+form div#navBarMaster li.logo-button:hover {
+  background:var(--logohoverbackground);
+}
+form div#navBarMaster.min li.logo-button {
+  background:var(--iconbackground);
+}
+form div#navBarMaster.min li.logo-button:hover {
+  background:var(--iconhoverbackground);
+}
+form div#navBarMaster li.logo-button a#linkLogo {
+  background: url(https://lh3.googleusercontent.com/lKOjZ7uX2_BLJHB_E7Uvccbx_hmJW776bG4yrMX0eE9opFLR0VQu_cE7_HC-eMuWC7ryqH-_HmmxPJgWkVlYtl4JJbqHQt0CE8FJEzwhKAUpGLUmZCBy8Dhh-lQN6LyM7LEwZQSJKg) no-repeat center center/contain;
+}
+form div#navBarMaster li.logo-button a#linkLogo img {
+  display:none;
+}
+
+
+form div.navbar.master div.navbar-form {
+  background: var(--main);
+  height:100%;
+}
+form div.navbar.master div.navbar-form:hover {
+  background: var(--mainhoverdark);
+}
+form div.navbar.master li#history-control.help-button {
+  background: var(--main);
+}
+form div.navbar.master li#history-control.help-button:hover {
+  background: var(--mainhoverbright);
+}
+
+
+form div.navbar.master li#branch-selector {
+  background: var(--main);
+}
+form div.navbar.master li#branch-selector:hover {
+  background: var(--mainhoverbright);
+}
+form div.navbar.master ul.navbar-nav li#branch-selector.open a.dropdown-toggle {
+  background: var(--mainpressed) !important;
+}
+form div.navbar.master ul.navbar-nav li#branch-selector.open a.dropdown-toggle:hover {
+  background: var(--mainhoverpressed) !important;
+}
+form div.navbar.master ul.navbar-nav li#branch-selector.open div.branch-selector__selector {
+  background: var(--topmenubackground);
+}
+form div.navbar.master ul.navbar-nav li#branch-selector.open div.branch-selector__selector div.highlight {
+  background: var(--branchnamehoverbackground);
+}
+ 
+
+form div.navbar.master li.bd-button {
+  background: var(--main);
+}
+form div.navbar.master li.bd-button:hover {
+  background: var(--mainhoverdark);
+}
+
+
+form div.navbar.master li.help-button {
+  background: var(--main);
+}
+form div.navbar.master li.help-button:hover {
+  background: var(--mainhoverbright);
+}
+
+
+form div.navbar.master a#btnUserMenu {
+  background: var(--main) !important;
+}
+form div.navbar.master a#btnUserMenu:hover {
+  background: var(--mainhoverbright) !important;
+}
+form div.navbar.master li.open a#btnUserMenu {
+  background: var(--mainpressed) !important;
+}
+form div.navbar.master li.open a#btnUserMenu:hover {
+  background: var(--mainhoverpressed) !important;
+}
+
+
+ul#userMenu.dropdown-menu {
+  background: var(--topmenubackground);
+}
+ul#userMenu.dropdown-menu li.menu-form button#btnUserProfile {
+  background: var(--profilebuttonbackground);
+  color: white;
+}
+ul#userMenu.dropdown-menu li.menu-form button#btnUserProfile:hover {
+  background: var(--profilebuttonhoverbackground);
+}
+ul#userMenu.dropdown-menu li.menu-form button#btnSignOut {
+  background: var(--logoutbuttonbackground);
+  color: white;
+}
+ul#userMenu.dropdown-menu li.menu-form button#btnSignOut:hover {
+  background: var(--logoutbuttonhoverbackground);
+}
+
+
+
+/* ================= */
+/* === Left Menu === */
+/* ================= */
+
+
+div#leftMenuW {
+  background: var(--sidebackground);
+}
+
+
+div#leftColumn div.list-group-item {
+  background: var(--sidebuttonbackground) !important;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  margin-bottom:-1px;
+}
+div#leftColumn div.list-group-item i,  div.list-group-item svg {
+  color: var(--sidebuttonicon) !important;
+}
+div#leftColumn div.list-group-item span {
+  color: var(--sidebuttontext) !important;
+}
+
+
+div#leftColumn div.list-group-item:hover {
+  background: var(--sidehoverbuttonbackground) !important;
+}
+div#leftColumn div.list-group-item:hover i, div.list-group-item:hover svg {
+  color: var(--sidehoverbuttonicon) !important;
+}
+div#leftColumn div.list-group-item:hover span {
+  color: var(--sidehoverbuttontext) !important;
+}
+
+
+div#leftColumn div.list-group-item.active {
+    background: var(--sidepressedbuttonbackground) !important;
+}
+div#leftColumn div.list-group-item.active i, div.list-group-item.active svg {
+  color: var(--sidepressedbuttonicon) !important;
+  padding: 2px 0px 0px;
+}
+div#leftColumn div.list-group-item.active span {
+  color: var(--sidepressedbuttontext) !important;
+  padding: 0px 0px 2px;
+}
+div.list-group-item.active:hover {
+  opacity:0.6;
+}
+
+
+div#leftColumn div#leftFooter {
+  background:var(--sidebackground);
+  border-top:1px solid #ccc;
+}
+div#leftColumn div#leftFooter i#btnMinLeftMenu {
+  color: var(--sidehidebuttonbackground);
+}
+div#leftColumn div#leftFooter:hover {
+  background: var(--sidehidebuttontext);
+}
+div#leftColumn div#leftFooter:hover i#btnMinLeftMenu {
+  color: var(--sidehoverhidebuttontext);
+}
+
+
+
+/* ================= */
+/* === Open Menu === */
+/* ================= */
+
+
+div#navMenu.nav-menu {
+  background:  HoneyDew;
+}
+div#moduleName {
+  padding-top: 10px;
+}
+div#moduleName div.module-text {
+  font-family: arial black;
+  background: Seagreen;
+  padding-left: 10px;
+  padding-bottom: 4px;
+  margin-left:-20px;
+}
+div#moduleName  div.module-text span.text {
+  color: #fff;
+}
+div#moduleName div.module-text:hover {
+  background: green;
+}
+div#moduleName div.module-text:hover span.text {
+  color: #ff0;
+}
+
+div#navMenu.nav-menu  div.top-links {
+  padding-top: 20px;
+  padding-bottom: 16px;
+}
+div#navMenu.nav-menu  div.top-links a {
+  background: #009999;
+}
+div#navMenu.nav-menu  div.top-links a:hover {
+  background: #33cccc;
+  color: blue;
+}
+
+
+div#moduleMenu div.menu-container h3 {
+  color: #000;
+  background:#ddd;
+}
+div#moduleMenu div.menu-container div.list-group, div#moduleMenu div.menu-container div.list-group a {
+  background: #eee;
+  color: loyalblue;
+  border: 1px solid #eee;
+}
+div#moduleMenu div.menu-container div.list-group a:hover {
+  background: CadetBlue !important;
+  color: yellow !important;
+}
+
+
+div#moduleMenu div.menu-container div.list-group a:hover  i.ac-star {
+    color: gold;
+}
+div#moduleMenu div.menu-container i.ac-star {
+    color: red;
+}
+
+
+div#moduleMenu div.module-name {
+  background: DarkSeaGreen;
+  padding: 6px 10px;
+}
+div#moduleMenu div.workspaces a {
+  background: SeaGreen;
+  color: #ddd;
+}
+div#moduleMenu div.workspaces i, div#moduleMenu div.workspaces svg{
+  color: lime;
+}
+div#moduleMenu div.workspaces a:hover {
+  background: ForestGreen;
+  color: #fff;
+}
+div#moduleMenu div.workspaces a:hover  i, div#moduleMenu div.workspaces a:hover svg{
+  color: yellow;
+}
+
+
+div.nav-menu__expander-repeater button#moduleExpanderRepeater {
+  background: #F5F5DC;
+}
+
+
+
+
+/* ================== */
+/* === Main Frame === */
+/* ================== */
+
+
+div.frame-cont iframe {
+  border: 1px solid silver;
+  background: transparent;
+  padding: 0;
+}
+div#_layer_cont  div.list-group.layer-actions {
+  width:100%;
+}
+
+
+div#_layer_cont div.actions {
+  background: AliceBlue;
+}
+div#_layer_cont div.right-menu-wrapper {
+  background: AliceBlue;
+}
+
+
+div#_layer_cont div.list-group-item {
+  width:100% !important;
+  background: AliceBlue;
+}
+div#_layer_cont div.list-group-item i, div#_layer_cont div.list-group-item svg {
+  color:blue;
+}
+div#_layer_cont div.list-group-item span {
+  color:red;
+}
+div#_layer_cont div.list-group-item:hover {
+  background: RoyalBlue;
+}
+div#_layer_cont div.list-group-item:hover i, div#_layer_cont div.list-group-item:hover svg {
+  color: yellow;
+}
+div#_layer_cont div.list-group-item:hover span {
+  color: white;
+}
+
+div#_layer_cont div.list-group-item.active {
+  background: PaleTurquoise;
+}
+div#_layer_cont div.list-group-item.active:hover {
+  opacity: 0.8;
+}
+
+
+div#_layer_cont div.right-footer {
+  background: AliceBlue;
+  border-top: 1px solid #ccc;
+}
+div#_layer_cont div.right-footer:hover {
+  background: PowderBlue;
+}
+
+
+
+
+
+
+
+
+/* ============================== */
+/* ============================== */
+/* ============================== */
+/* ============================== */
+
+
+/* =============== */
+/* === Top Bar === 
+
+form div.navbar.master {
+  background-color: RebeccaPurple;
+}
+
+form div#navBarMaster li.logo-button {
+  background: Lavender;
+  border-width: 2px 1px 1px 2px;
+  border-color: RebeccaPurple;
+  border-style: solid;
+}
+form div#navBarMaster li.logo-button:hover {
+  background:MediumOrchid;
+}
+form div#navBarMaster.min li.logo-button {
+  background:DarkMagenta;
+}
+form div#navBarMaster.min li.logo-button:hover {
+  background:BlueViolet;
+}
+form div#navBarMaster li.logo-button a#linkLogo {
+  background: url(https://lh3.googleusercontent.com/lKOjZ7uX2_BLJHB_E7Uvccbx_hmJW776bG4yrMX0eE9opFLR0VQu_cE7_HC-eMuWC7ryqH-_HmmxPJgWkVlYtl4JJbqHQt0CE8FJEzwhKAUpGLUmZCBy8Dhh-lQN6LyM7LEwZQSJKg) no-repeat center center/contain;
+}
+form div#navBarMaster li.logo-button a#linkLogo img {
+  display:none;
+}
+
+
+form div.navbar.master div.navbar-form {
+  background: RebeccaPurple;
+  height:100%;
+}
+form div.navbar.master div.navbar-form:hover {
+  background: Indigo;
+}
+form div.navbar.master li#history-control.help-button {
+  background: RebeccaPurple;
+}
+form div.navbar.master li#history-control.help-button:hover {
+  background: DarkViolet;
+}
+
+
+form div.navbar.master li#branch-selector {
+  background: RebeccaPurple;
+}
+form div.navbar.master li#branch-selector:hover {
+  background: DarkViolet;
+}
+form div.navbar.master ul.navbar-nav li#branch-selector.open a.dropdown-toggle {
+  background: MediumPurple !important;
+}
+form div.navbar.master ul.navbar-nav li#branch-selector.open a.dropdown-toggle:hover {
+  background: BlueViolet !important;
+}
+form div.navbar.master ul.navbar-nav li#branch-selector.open div.branch-selector__selector {
+  background: Lavender;
+}
+form div.navbar.master ul.navbar-nav li#branch-selector.open div.branch-selector__selector div.highlight {
+  background: MediumSlateBlue;
+}
+ 
+
+form div.navbar.master li.bd-button {
+  background: RebeccaPurple;
+}
+form div.navbar.master li.bd-button:hover {
+  background: Indigo;
+}
+
+
+form div.navbar.master li.help-button {
+  background: RebeccaPurple;
+}
+form div.navbar.master li.help-button:hover {
+  background: DarkViolet;
+}
+
+
+form div.navbar.master a#btnUserMenu {
+  background: RebeccaPurple !important;
+}
+form div.navbar.master a#btnUserMenu:hover {
+  background: DarkViolet !important;
+}
+form div.navbar.master li.open a#btnUserMenu {
+  background: MediumPurple !important;
+}
+form div.navbar.master li.open a#btnUserMenu:hover {
+  background: BlueViolet !important;
+}
+
+
+ul#userMenu.dropdown-menu {
+  background: Lavender;
+}
+ul#userMenu.dropdown-menu li.menu-form button#btnUserProfile {
+  background: SlateBlue;
+  color: white;
+}
+ul#userMenu.dropdown-menu li.menu-form button#btnUserProfile:hover {
+  background: DarkSlateBlue;
+  color: yellow;
+}
+ul#userMenu.dropdown-menu li.menu-form button#btnSignOut {
+  background: red;
+  color: white;
+}
+ul#userMenu.dropdown-menu li.menu-form button#btnSignOut:hover {
+  background: FireBrick;
+  color: yellow;
+}
+
+*/
+/* =============== */
+
+
+
+
+/* ================= */
+/* === Left Menu === 
+
+div#leftMenuW {
+  background:MediumPurple;
+}
+
+
+div#leftColumn div.list-group-item {
+  background: Indigo !important;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  margin-bottom:-1px;
+}
+div#leftColumn div.list-group-item i,  div.list-group-item svg {
+  color: pink !important;
+}
+div#leftColumn div.list-group-item span {
+  color: yellow !important;
+}
+
+
+div#leftColumn div.list-group-item:hover {
+  background: IndianRed !important;
+}
+div#leftColumn div.list-group-item:hover i, div.list-group-item:hover svg {
+  color: yellow !important;
+}
+div#leftColumn div.list-group-item:hover span {
+  color: LavenderBlush !important;
+}
+
+
+div#leftColumn div.list-group-item.active {
+    background: DarkCyan !important;
+}
+div#leftColumn div.list-group-item.active i, div.list-group-item.active svg {
+  color: gold !important;
+  padding: 2px 0px 0px;
+}
+div#leftColumn div.list-group-item.active span {
+  color: #fff !important;
+  padding: 0px 0px 2px;
+}
+div.list-group-item.active:hover {
+  opacity:0.6;
+}
+
+
+div#leftColumn div#leftFooter {
+  background:MediumPurple;
+  border-top:1px solid #ccc;
+}
+div#leftColumn div#leftFooter i#btnMinLeftMenu {
+  color: #ccc;
+}
+div#leftColumn div#leftFooter:hover {
+  background:MediumOrchid;
+}
+div#leftColumn div#leftFooter:hover i#btnMinLeftMenu {
+  color: #ff0;
+}
+
+*/
+/* ================= */
+
+
+
+
+/* ================= */
+/* === Open Menu === 
+
+div#navMenu.nav-menu {
+  background:  #c2f0c2;
+}
+div#moduleName {
+  padding-top: 10px;
+}
+div#moduleName div.module-text {
+  font-family: arial black;
+  background: Seagreen;
+  padding-left: 10px;
+  padding-bottom: 4px;
+  margin-left:-20px;
+}
+div#moduleName  div.module-text span.text {
+  color: #fff;
+}
+div#moduleName div.module-text:hover {
+  background: green;
+}
+div#moduleName div.module-text:hover span.text {
+  color: #ff0;
+}
+
+div#navMenu.nav-menu  div.top-links {
+  padding-top: 20px;
+  padding-bottom: 16px;
+}
+div#navMenu.nav-menu  div.top-links a {
+  background: #009999;
+}
+div#navMenu.nav-menu  div.top-links a:hover {
+  background: #33cccc;
+  color: blue;
+}
+
+
+div#moduleMenu div.menu-container h3 {
+  color: #000;
+  background:#ddd;
+}
+div#moduleMenu div.menu-container div.list-group, div#moduleMenu div.menu-container div.list-group a {
+  background: #eee;
+  color: loyalblue;
+  border: 1px solid #eee;
+}
+div#moduleMenu div.menu-container div.list-group a:hover {
+  background: CadetBlue !important;
+  color: yellow !important;
+}
+
+
+div#moduleMenu div.menu-container div.list-group a:hover  i.ac-star {
+    color: gold;
+}
+div#moduleMenu div.menu-container i.ac-star {
+    color: red;
+}
+
+
+div#moduleMenu div.module-name {
+  background: DarkSeaGreen;
+  padding: 6px 10px;
+}
+div#moduleMenu div.workspaces a {
+  background: SeaGreen;
+  color: #ddd;
+}
+div#moduleMenu div.workspaces i, div#moduleMenu div.workspaces svg{
+  color: lime;
+}
+div#moduleMenu div.workspaces a:hover {
+  background: ForestGreen;
+  color: #fff;
+}
+div#moduleMenu div.workspaces a:hover  i, div#moduleMenu div.workspaces a:hover svg{
+  color: yellow;
+}
+
+
+div.nav-menu__expander-repeater button#moduleExpanderRepeater {
+  background: #F5F5DC;
+}
+
+*/
+/* ================= */
+
+
+
+
+/* ================== */
+/* === Main Frame === 
+
+div.frame-cont iframe {
+  border: 1px solid silver;
+  background: transparent;
+  padding: 0;
+}
+div#_layer_cont  div.list-group.layer-actions {
+  width:100%;
+}
+
+
+div#_layer_cont div.actions {
+  background: AliceBlue;
+}
+div#_layer_cont div.right-menu-wrapper {
+  background: AliceBlue;
+}
+
+
+div#_layer_cont div.list-group-item {
+  width:100% !important;
+  background: AliceBlue;
+}
+div#_layer_cont div.list-group-item i, div#_layer_cont div.list-group-item svg {
+  color:blue;
+}
+div#_layer_cont div.list-group-item span {
+  color:red;
+}
+div#_layer_cont div.list-group-item:hover {
+  background: RoyalBlue;
+}
+div#_layer_cont div.list-group-item:hover i, div#_layer_cont div.list-group-item:hover svg {
+  color: yellow;
+}
+div#_layer_cont div.list-group-item:hover span {
+  color: white;
+}
+
+div#_layer_cont div.list-group-item.active {
+  background: PaleTurquoise;
+}
+div#_layer_cont div.list-group-item.active:hover {
+  opacity: 0.8;
+}
+
+
+div#_layer_cont div.right-footer {
+  background: AliceBlue;
+  border-top: 1px solid #ccc;
+}
+div#_layer_cont div.right-footer:hover {
+  background: PowderBlue;
+}
+
+*/
+/* ================== */
