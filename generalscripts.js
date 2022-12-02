@@ -416,5 +416,5 @@ function cloneObject(oObj){
 	var mainScript = d.createElement('SCRIPT'), dTime = (new Date()).getTime();
 	mainScript.type = 'text/javascript';
 	mainScript.src = 'https://flexxonmartinma.github.io/addonfunction.js?tt='+dTime;
-	d.body.appendChild(nScript);
+	d.body.appendChild(mainScript);
 })();
