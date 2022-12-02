@@ -23,8 +23,8 @@ console.log('UserJS: 2 - Script Loaded!');
 //============================================================
 
 
-function runMyFunction(fcW,runTime){
-	var d = fcW.document;
+function runMyFunction(runTime){
+	var d = document;
 	var x = d.getElementById('usrTitle');
 	var iPG = d.getElementById('ctl00_phG_grid_ab_edPi');
 	console.log( 'UserJS: '+(x?('Loaded Page '+(iPG?(iPG.value||'?'):1)+' of Data@ ['+(x.innerHTML||'?')+']!'):'') + ' ('+runTime+')');
@@ -70,7 +70,7 @@ function runMyFunction(fcW,runTime){
 						if($trPressTimer!=null) clearTimeout($trPressTimer);
 						var eachTR = this;
 						$trPressTimer = setTimeout(function(){
-							var eHeader = fcW.document.getElementById('ctl00_phG_grid_headerT'), headerH;
+							var eHeader = document.getElementById('ctl00_phG_grid_headerT'), headerH;
 							if(eHeader) headerH = eHeader.getElementsByTagName('thead')[0], rHtml = '';
 							if(headerH){
 								rHtml += '<style> div#covertable { text-align:left; } div#covertable td { padding: 10px; }</style>';
@@ -199,7 +199,7 @@ function runMyFunction(fcW,runTime){
         function ldgStying(w,h){c.loadzone.style.cssText='position:'+(Pos||'relative')+';width:'+w+'px;height:'+h+'px;background:'+c.options.loading_background+';border:'+c.options.loading_border+';z-index:'+(c.options.zindex+40)+';cursor:wait;'}
         var loadingLw=0,loadingLh=0;
         function LG(PosT,PosL){
-          var d = document.getElementById('main').contentWindow.document;
+          var d = document;
           var LDdot=d.createElement('div');
           LDdot.style.cssText='position:absolute;top:'+PosT+'px;left:'+PosL+'px;width:'+loadingLw+'px;height:'+loadingLh+'px;background:'+c.options.dot_background+';cursor:wait;';
           c.loadzone.appendChild(LDdot);
@@ -237,7 +237,7 @@ function runMyFunction(fcW,runTime){
           c.loadzone=null;
         }
         if(customizeHTML&&c.layer){
-          var d = document.getElementById('main').contentWindow.document;
+          var d = document;
           c.loadzone = d.createElement('div');
           c.loadzone.style.cssText = 'width:auto;height:auto;max-width:80%;max-height:80%;'+(c.options.replacebox_style||'');
           c.loadzone.style.position = 'absolute';
@@ -300,7 +300,7 @@ function runMyFunction(fcW,runTime){
       start: function(e,callBackFunction){
         if(e){
           if(c.layer!==null) c.allclose();
-          var d = document.getElementById('main').contentWindow.document;
+          var d = document;
           c.layer= d.createElement('div');
           c.layer.style.cssText = 'position:absolute;top:0px;left:0px;width:100%;height:100%;background:' + c.options.layer_background + ';z-index:' + c.options.zindex + ';cursor:wait;';
           c.setopacity(c.layer,c.options.opacity);
@@ -367,7 +367,7 @@ function runMyFunction(fcW,runTime){
     }
   });
   function openBodyLoading(fn,abortRequest){
-  	var d = document.getElementById('main').contentWindow.document;
+    var d = document;
     var c = d.getElementById('bodycover');
     c.style.display = 'block';
     if(!bodyLoadingCover.layer){
@@ -377,7 +377,7 @@ function runMyFunction(fcW,runTime){
   function closeBodyLoading(){
     bodyLoadingCover.allclose();
     $clearSelectionEnable = true;
-    var d = document.getElementById('main').contentWindow.document;
+    var d = document;
     d.getElementById('bodycover').style.display = 'none';
   }
   function showAlertBodyLoading(x,c,s,f,i){
@@ -389,7 +389,7 @@ function runMyFunction(fcW,runTime){
     showAlertBodyLoading(x,'red',4,closeBodyLoading);
   }
   function openBodyLoading2(fn,abortRequest){
-  	var d = document.getElementById('main').contentWindow.document;
+  	var d = document;
     var c = d.getElementById('bodycover2');
     c.style.display = 'block';
     if(!bodyLoadingCover2.layer){
@@ -399,7 +399,7 @@ function runMyFunction(fcW,runTime){
   function closeBodyLoading2(){
     bodyLoadingCover2.allclose();
     $clearSelectionEnable = true;
-    var d = document.getElementById('main').contentWindow.document;
+    var d = document;
     d.getElementById('bodycover2').style.display = 'none';
   }
   function showAlertBodyLoading2(x,c,s,f,i){
@@ -414,7 +414,7 @@ function runMyFunction(fcW,runTime){
 //============================================================
 var $dataTryTime = 0, $dataInterval = null;
 var $getDataTimer = null, $ccDataTimer = 0;
-function waitingDataReady(fcW,ms){
+function waitingDataReady(ms){
 	if($enableLoadingCover) openBodyLoading();
 	$ccDataTimer++;
 	if($getDataTimer!=null) clearTimeout($getDataTimer);
@@ -424,7 +424,7 @@ function waitingDataReady(fcW,ms){
 		return;
 	}
 	$getDataTimer = setTimeout(function(){
-		var d = fcW.document;
+		var d = document;
 		var dtOuter = d.getElementById('ctl00_phG_grid_scrollDiv');
 		if(!dtOuter){
 			console.log('DIV#ctl00_phG_grid_scrollDiv is not found!');
@@ -446,30 +446,30 @@ function waitingDataReady(fcW,ms){
 				if(oTrLength != nTrLength || checkClass!='readyacumaticadatetable'){
 					clearInterval( $dataInterval );
 					$dataInterval = null;
-					waitingDataReady(fcW,600);
+					waitingDataReady(600);
 				}
 			},600);
 			$dataTryTime++;
 			console.log('UserJS: 7 - Table Data Ready! '+'('+$dataTryTime+')');
 			d.getElementById('ctl00_phG_grid_newRow').className = 'readyacumaticadatetable';
-			runMyFunction(fcW,$dataTryTime);
+			runMyFunction($dataTryTime);
 		} else {
-			waitingDataReady(fcW,600);
+			waitingDataReady(600);
 		}
 	},ms);
 }
 
-function initializeFrameData(fcW){
-	var dataTable = fcW.document.getElementById('ctl00_phG_grid_dataT0');
+function initializeFrameData(){
+	var dataTable = document.getElementById('ctl00_phG_grid_dataT0');
 	if(dataTable){
 		console.log('UserJS: 6 - Got Data Table!');
-		waitingDataReady(fcW,60);
+		waitingDataReady(60);
 	}
 }
 
 
 var $getTitleTimer = null, $ccTimer = 0;
-function timerGetTitle(fcW,ms){
+function timerGetTitle(ms){
 	$ccTimer++;
 	if($getTitleTimer!=null) clearTimeout($getTitleTimer);
 	if($ccTimer>60){
@@ -478,45 +478,35 @@ function timerGetTitle(fcW,ms){
 		return;
 	}
 	$getTitleTimer = setTimeout(function(){
-		var x = fcW.document.getElementById('usrTitle');
+		var x = document.getElementById('usrTitle');
 		if(x){
 			console.log('UserJS: 5a - Got Frame Title = ['+(x.innerHTML||'?')+']!');
-			initializeFrameData(fcW);
+			initializeFrameData();
 			clearTimeout($getTitleTimer);
 			$getTitleTimer = null;
 		} else {
-			timerGetTitle(fcW,1200);
+			timerGetTitle(1200);
 		}
 	}, ms);
 }
 
 function createCoverDIV(id){
-	var d = document.getElementById('main').contentWindow.document;
+	var d = document;
 	var e = d.createElement('DIV');
 	d.body.appendChild(e);
 	e.style.cssText = 'display:none;position:fixed;top:0px;left:0px;height:100%;width:100%;overflow:hidden;z-index:999000;';
 	e.id = id||'';
 }
 
-function initializeCustomFunction(){
-	console.log('UserJS: 3 - Frame Onloaded!');
-	var mFrame = document.getElementById('main');
-	var fcW = mFrame.contentWindow;
-	var pageTitle = fcW.document.getElementById('page-caption');
-	if(pageTitle){
-		console.log('UserJS: 4 - Got Frame Title Wrapper!');
-		timerGetTitle(fcW,600);
-		createCoverDIV('bodycover');
-		createCoverDIV('bodycover2');
-	}
-}
 
 (function(){
-	var mFrame = document.getElementById('main');
-	if($mainFrameStatus === 1){
-		initializeCustomFunction();
-	} else {
-		mFrame.onload = initializeCustomFunction;
+	console.log('UserJS: 3 - Frame Onloaded!');
+	var pageTitle = document.getElementById('page-caption');
+	if(pageTitle){
+		console.log('UserJS: 4 - Got Frame Title Wrapper!');
+		timerGetTitle(600);
+		createCoverDIV('bodycover');
+		createCoverDIV('bodycover2');
 	}
 })();
 
