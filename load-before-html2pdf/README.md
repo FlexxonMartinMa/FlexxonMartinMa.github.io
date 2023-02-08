@@ -1,5 +1,5 @@
 # Example:
-  
+<pre>
 function addScript(k,dElm,loadFn){  
     var d = document, h = dElm||d.getElementsByTagName('HEAD')[0];  
     if(h&&k){  
@@ -33,3 +33,4 @@ addScript( "https://cdn.jsdelivr.net/npm/vue/dist/vue.js" ,pWinHead,function(){
 });  
   
 exampleBodyElement.onclick = printAsPDF;  
+</pre>
