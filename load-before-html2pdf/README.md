@@ -11,7 +11,7 @@ function addScript(k,dElm,loadFn){
     }
 }
 
-addScript('https://cdn.jsdelivr.net/npm/vue/dist/vue.js',pWinHead,function(){
+addScript('https://cdn.jsdelivr.net/npm/vue/dist/vue.js',pWinHead,function(){\n
     addScript('https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js',pWinHead,function(){
         var d = document, x = '';
         x += 'function printAsPDF(d,fName){';
